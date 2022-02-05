@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
-
   * {
   box-sizing: border-box;
   margin: 0;
@@ -11,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Poppins', sans-serif;
-    background: #695cfe;
+    background: ${({ theme }) => theme.colors.body.bg};
     font-size:1.2rem;
   }
   p {

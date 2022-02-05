@@ -4,10 +4,8 @@ import { StyledHeader } from "./styles/StyledHeader";
 const Header = () => {
   return (
     <StyledHeader>
-      <header>
-        <img src={logo} alt="logo picture" />
-        <h1> React Forum App</h1>
-      </header>
+      <img src={logo} alt="logo picture" />
+      <h1> React Forum App</h1>
     </StyledHeader>
   );
 };
