@@ -5,6 +5,7 @@ import Cards from "../Cards";
 import useFetch from "../useFetch";
 
 const HomePage = () => {
+  // fetch the post by using the custom fetch hook from api 
   const { data, isLoading } = useFetch(
     "https://jsonplaceholder.typicode.com/posts"
   );

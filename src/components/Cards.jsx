@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const Cards = ({ post }) => {
-  const { title, id } = post;
+  const { title} = post;
   return (
     <div className="post">
       <Link

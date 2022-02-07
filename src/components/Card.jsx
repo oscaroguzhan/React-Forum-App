@@ -1,14 +1,23 @@
-import { CircularProgress } from "@material-ui/core";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { StyledCard } from "./styles/StyledCard";
 import CommentIcon from "@material-ui/icons/Comment";
+import CommentDetails from "./CommentDetails";
 
 const Card = (props) => {
   //console.log(props);
-  const { body, userId } = props.details;
-  const { id } = useParams();
+  const [showComments, setShowComments] = useState(false);
+  const { body } = props.details;
+  //console.log(props.commentDetails);
+  //console.log(props.location);
 
+  const { id } = useParams();
+  // console.log(email);
+
+  // define toggle function to show comment details for the post
+  const handleComments = () => {
+    setShowComments(!showComments);
+  };
   if (props.details) {
     return (
       <StyledCard>
@@ -16,15 +25,27 @@ const Card = (props) => {
           <div className="card">
             <div className="box">
               <div className="content">
-                <h2> {`${id}`} </h2>
-                <h3> Post </h3>
-                <p>{body}</p>
-                <a href="#">
-                  Read Comments{" "}
-                  <span>
-                    <CommentIcon className="comment-icon" />
-                  </span>
-                </a>
+                <div>
+                  <h2> {`${id}`} </h2>
+                  <h3> Post </h3>
+                  <p>{body}</p>
+                  <button onClick={handleComments}>
+                    {showComments ? "User Comments" : "Read User Comments"}
+                    <span>
+                      <CommentIcon className="comment-icon" />
+                    </span>
+                  </button>
+                </div>
+                {showComments && (
+                  <div>
+                    {props.commentDetails.map((comment, i) => (
+                      <CommentDetails comment={comment} key={i} />
+                    ))}
+                    <Link to="/">
+                      <button>Go to Homepage</button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -34,11 +55,6 @@ const Card = (props) => {
         </footer>
       </StyledCard>
     );
-  } else {
-    <>
-      <h1> Fetch data...</h1>
-      <CircularProgress />
-    </>;
   }
 };
 

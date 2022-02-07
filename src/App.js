@@ -5,7 +5,7 @@ import CardDetails from "./components/pages/CardDetails";
 import HomePage from "./components/pages/HomePage";
 import GlobalStyles from "./components/styles/GlobalStyles";
 
-// colors theme setup
+// theme setup for colors
 const theme = {
   colors: {
     header: {
@@ -15,11 +15,13 @@ const theme = {
       bg: "#695cfe",
 
       homepage: {
-        white: '#fff',
-        black: '#000',
-      }
+        white: "#fff",
+        black: "#000",
+      },
+      card: {
+        bg: "#ebf5fc",
+      },
     },
-
   },
 };
 function App() {
@@ -27,7 +29,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
-        {/* TODO:  Behöver en container component */}
         <Header />
         <Switch>
           <Route exact path="/" render={(props) => <HomePage {...props} />} />

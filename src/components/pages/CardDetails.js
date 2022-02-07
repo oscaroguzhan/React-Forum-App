@@ -1,4 +1,3 @@
-import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -7,8 +6,7 @@ import Card from "../Card";
 const CardDetails = (props) => {
   const { id } = useParams();
   const [details, setDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     if (!props.location.details) {
       console.log("There is no data found ");
@@ -21,16 +19,32 @@ const CardDetails = (props) => {
         })
         .then((json) => {
           setDetails(json);
-          setIsLoading(false);
         });
     }
   }, []);
 
+  // fetch the comments from the api
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
+      .then((response) => response.json())
+      .then((json) => setComments(json));
+  }, []);
+
+  //console.log(comments);
+  //console.log(props.location.details);
   return (
     <>
       <Card
         details={props.location.details || details}
-        key={props.location.details.id}
+        commentDetails={comments}
+        key={
+          props.location.details
+            ? props.location.details.id
+            : details
+            ? details.id
+            : ""
+        }
+        {...props}
       />
     </>
   );
